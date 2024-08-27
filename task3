@@ -1,0 +1,48 @@
+/*ROCK, PAPER, SCISSORS GAME*/
+import random
+
+def get_user_choice():
+    choices = {'r': 'Rock', 'p': 'Paper', 's': 'Scissors'}
+    user_input = input("Enter your choice (r for Rock, p for Paper, s for Scissors): ").lower()
+    
+    while user_input not in choices:
+        print("Invalid input! Please try again.")
+        user_input = input("Enter your choice (r for Rock, p for Paper, s for Scissors): ").lower()
+    
+    return user_input, choices[user_input]
+
+def get_computer_choice():
+    choices = {'r': 'Rock', 'p': 'Paper', 's': 'Scissors'}
+    comp_choice = random.choice(list(choices.keys()))
+    return comp_choice, choices[comp_choice]
+
+def determine_winner(user_choice, comp_choice):
+    if user_choice == comp_choice:
+        return "It's a tie!"
+    
+    # Define winning combinations
+    winning_combinations = {
+        'r': 's',  # Rock beats Scissors
+        'p': 'r',  # Paper beats Rock
+        's': 'p'   # Scissors beat Paper
+    }
+    
+    if winning_combinations[user_choice] == comp_choice:
+        return "You win!"
+    else:
+        return "Computer wins!"
+
+def play_game():
+    print("Welcome to Rock, Paper, Scissors!")
+    
+    user_choice, user_choice_name = get_user_choice()
+    print(f"You chose: {user_choice_name}")
+    
+    comp_choice, comp_choice_name = get_computer_choice()
+    print(f"Computer chose: {comp_choice_name}")
+    
+    result = determine_winner(user_choice, comp_choice)
+    print(result)
+
+if __name__ == "__main__":
+    play_game()
